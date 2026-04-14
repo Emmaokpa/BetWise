@@ -1,0 +1,26 @@
+# BetWise NG - Algorithmic Football Intelligence
+
+BetWise NG is an advanced, algorithm-driven football prediction and signal platform tailored for the Nigerian market. It provides real-time data analysis, verified banker tips, and comprehensive league statistics to empower bettors with data-backed insights.
+
+## Core Features
+1. **Signal Feed**: A high-precision matrix of algorithmic football predictions across major global leagues.
+2. **Banker Selection**: The highest confidence tip of the day, selected by proprietary neural network models.
+3. **League Intelligence**: Real-time standings, form guides, and search functionality for teams in top leagues (PL, La Liga, Serie A, etc.).
+4. **Accumulator Builder**: A tool to create and share multi-bet slips via WhatsApp with calculated total odds.
+5. **Personal Tracker**: A system to "follow" signals and track theoretical win rates (stored locally).
+
+## Technology Stack
+- **Frontend**: React (Vite), Tailwind CSS, Framer Motion (Animations), Lucide React (Icons).
+- **Backend**: Convex (Real-time DB & Cloud Functions).
+- **Design System**: Premium glassmorphism with dynamic gradients and shimmering skeleton loaders.
+
+## Monetization
+- **Native Ads**: Integrated ad slots in the signal feed designed to mimic official match cards.
+- **Affiliate Loops**: Direct integration with booking platforms (Bet9ja, SportyBet) for seamless slip execution.
+
+## URLs
+- `/`: Dashboard Overview & Banker selection.
+- `/predictions`: Full signal feed with league filters.
+- `/stats`: League standings and diagnostics search.
+- `/results`: Archive of verified signal outcomes.
+- `/match/:id`: Deep analysis and H2H data for specific matches.

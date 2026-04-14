@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --bg-primary: #050507;
+  --bg-secondary: rgba(15, 15, 20, 0.7);
+  --bg-tertiary: rgba(22, 22, 30, 0.8);
+  
+  --brand-primary: #00FF9C; /* Neon Mint */
+  --brand-secondary: #00E1FF; /* Azure/Cyan */
+  --brand-accent: #7C3AED; /* Deep Violet */
+  
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0AEC0;
+  --text-muted: #4A5568;
+  
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --premium-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  
+  /* Advanced Mesh + Noise Background */
+  background-image: 
+    radial-gradient(ellipse at 15% 50%, rgba(124, 58, 237, 0.07), transparent 45%),
+    radial-gradient(ellipse at 85% 30%, rgba(0, 255, 156, 0.06), transparent 45%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 225, 255, 0.05), transparent 50%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Glass-morphism refined - Apple Vision Pro style */
+.glass-ultra {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05), var(--premium-shadow);
+}
+
+/* Animated Glow Border */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, transparent, var(--brand-primary), var(--brand-secondary), transparent);
+  background-size: 200% 100%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: shimmer 5s ease-in-out infinite alternate;
+  opacity: 0.35;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0%; }
+  100% { background-position: -100% 0%; }
+}
+
+/* Shimmer Overlay */
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.04), transparent);
+  transform: skewX(-25deg);
+  transition: 0.7s;
+}
+.shimmer-effect:hover::before {
+  animation: shine 1.5s;
+}
+
+@keyframes shine {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 255, 156, 0.5);
+}
+
+.premium-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 20%, #A0AEC0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-hover-scale {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card-hover-scale:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(0, 255, 156, 0.1);
+}
