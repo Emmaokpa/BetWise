@@ -26,9 +26,7 @@ const Sidebar = () => {
   return (
     <aside className="hidden md:flex flex-col w-72 h-screen sticky top-0 bg-transparent border-r border-white/5 p-6 z-50">
       <div className="flex items-center gap-3 mb-12 select-none">
-        <div className="w-10 h-10 rounded-xl bg-brand-primary flex items-center justify-center shadow-[0_0_20px_rgba(0,255,156,0.2)]">
-          <Plane size={20} className="text-black" />
-        </div>
+        <img src="/logo.png" className="w-10 h-10 rounded-xl" alt="BetWise Logo" />
         <span className="text-2xl font-black font-display text-white tracking-tight">BetWise <span className="text-brand-primary">NG</span></span>
       </div>
 
@@ -67,9 +65,7 @@ const Topbar = () => {
   return (
     <header className="sticky top-0 z-40 w-full h-[76px] bg-bg-primary/50 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-4 md:px-8">
       <div className="flex items-center gap-4 md:hidden">
-        <div className="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center shadow-[0_0_15px_rgba(0,255,156,0.2)]">
-          <Plane size={18} className="text-black" />
-        </div>
+        <img src="/logo.png" className="w-8 h-8 rounded-lg" alt="BetWise" />
         <span className="text-lg font-black font-display text-white">BetWise</span>
       </div>
       

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trash2, ChevronUp, ChevronDown, CheckCircle2 } from 'lucide-react';
+import { X, Trash2, ChevronUp, ChevronDown, CheckCircle2, TrendingUp } from 'lucide-react';
 import useAccumulatorStore from '../../store/useAccumulatorStore';
 
 const BetSlip = () => {
@@ -131,16 +131,15 @@ const BetSlip = () => {
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                           </button>
-                          <button 
-                            onClick={() => {
-                              const text = encodeURIComponent(`🔥 Just built a ${totalOdds.toFixed(2)} odds banker on BetWise NG!\n\nBooking Code: ${bookingCode}\nPotential Return: ₦${potentialReturn.toLocaleString()}\n\nCheck the full analysis here: ${window.location.origin}`);
-                              window.open(`https://wa.me/?text=${text}`, '_blank');
-                            }}
-                            className="p-1.5 bg-green-500/20 rounded-md text-green-500 hover:bg-green-500 hover:text-white transition-all"
-                            title="Share to WhatsApp"
+                          <a 
+                            href="https://www.bet9ja.com/?affid=YOUR_ID"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 bg-brand-primary/20 rounded-md text-brand-primary hover:bg-brand-primary hover:text-black transition-all"
+                            title="Stake on Bet9ja"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                          </button>
+                            <TrendingUp size={14} />
+                          </a>
                         </div>
                       </div>
                       <button 

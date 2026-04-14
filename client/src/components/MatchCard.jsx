@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Shield, Zap, Star, Plus, Check } from 'lucide-react';
+import { ChevronRight, Star, Plus, Check, TrendingUp } from 'lucide-react';
 import useAccumulatorStore from '../store/useAccumulatorStore';
 import useFollows from '../hooks/useFollows';
+import TeamIcon from './shared/TeamIcon';
 
 const MatchCard = ({ match: item }) => {
   const { toggleFollow, isFollowed: checkFollowed } = useFollows();
@@ -61,18 +62,16 @@ const MatchCard = ({ match: item }) => {
         >
           {isInSlip ? <Check size={14} /> : <Plus size={14} />}
         </button>
-        <button 
-          onClick={(e) => {
-            e.preventDefault();
-            const url = `${window.location.origin}/match/${match.apiId || match._id}`;
-            const text = encodeURIComponent(`💡 FREE AI TIP: ${match.homeTeam?.shortName} vs ${match.awayTeam?.shortName}\n\nVerdict: ${expertTip}\nConfidence: ${confidence}%\n\nFull Analysis: ${url}`);
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-          }}
-          className="w-8 h-8 rounded-full glass-ultra flex items-center justify-center border-white/10 hover:bg-green-500/20 hover:text-green-500 transition-all shadow-xl"
-          title="Share to WhatsApp"
+        <a 
+          href="https://www.bet9ja.com/?affid=YOUR_ID" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-10 h-10 rounded-xl glass-ultra flex items-center justify-center border-brand-primary/20 bg-brand-primary/10 text-brand-primary hover:bg-brand-primary hover:text-black transition-all shadow-xl"
+          title="Bet on Bet9ja"
+          onClick={(e) => e.stopPropagation()}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </button>
+          <TrendingUp size={16} />
+        </a>
       </div>
 
       <Link to={`/match/${match.apiId || match._id}`} className="block relative group h-full">
@@ -99,13 +98,9 @@ const MatchCard = ({ match: item }) => {
             </div>
           </div>
 
-          {/* Teams Grid */}
-          <div className="flex items-center justify-between gap-4 mb-6 relative flex-1">
             <div className="flex flex-col items-center flex-1 w-1/3">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl glass-ultra mb-3 flex items-center justify-center p-2 md:p-3 relative overflow-hidden group-hover:border-brand-primary/20 transition-colors bg-white/5">
-                <img src={match.homeTeam?.crest || 'https://crests.football-data.org/57.png'} alt="" className="w-full h-full object-contain relative z-10" />
-              </div>
-              <h3 className="text-xs md:text-sm font-bold text-white text-center leading-tight tracking-tight uppercase line-clamp-2">{match.homeTeam?.shortName || 'Team A'}</h3>
+              <TeamIcon src={match.homeTeam?.crest} name={match.homeTeam?.shortName} />
+              <h3 className="text-xs md:text-sm font-bold text-white text-center leading-tight tracking-tight uppercase line-clamp-2 mt-3">{match.homeTeam?.shortName || 'Team A'}</h3>
             </div>
 
             <div className="flex flex-col items-center gap-1 px-2">
@@ -113,12 +108,9 @@ const MatchCard = ({ match: item }) => {
             </div>
 
             <div className="flex flex-col items-center flex-1 w-1/3">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl glass-ultra mb-3 flex items-center justify-center p-2 md:p-3 relative overflow-hidden group-hover:border-brand-accent/20 transition-colors bg-white/5">
-                <img src={match.awayTeam?.crest || 'https://crests.football-data.org/65.png'} alt="" className="w-full h-full object-contain relative z-10" />
-              </div>
-              <h3 className="text-xs md:text-sm font-bold text-white text-center leading-tight tracking-tight uppercase line-clamp-2">{match.awayTeam?.shortName || 'Team B'}</h3>
+              <TeamIcon src={match.awayTeam?.crest} name={match.awayTeam?.shortName} />
+              <h3 className="text-xs md:text-sm font-bold text-white text-center leading-tight tracking-tight uppercase line-clamp-2 mt-3">{match.awayTeam?.shortName || 'Team B'}</h3>
             </div>
-          </div>
 
           {/* Expert Insight Bar */}
           <div className="pt-4 border-t border-white/[0.05] mt-auto">

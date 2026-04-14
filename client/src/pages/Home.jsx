@@ -123,12 +123,12 @@ const Home = () => {
         <div className="flex justify-between items-end">
           <div>
             <h4 className="text-xl font-black text-white tracking-tight flex items-center gap-2 mb-1">
-              <Zap size={20} className="text-brand-primary" /> Algorithmic Selections
+              Data Matrix <span className="premium-gradient-text">Signals</span>
             </h4>
-            <p className="text-xs text-text-muted">Top matches curated dynamically by AI.</p>
+            <p className="text-xs text-text-muted">Top precision matches curated by neural models today.</p>
           </div>
-          <button className="text-xs font-bold text-text-muted hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
-            View All <ChevronRight size={14} />
+          <button className="text-[10px] font-black text-brand-primary hover:text-white uppercase tracking-[0.2em] px-4 py-2 rounded-xl bg-brand-primary/5 border border-brand-primary/10 transition-all">
+            Filter Selections
           </button>
         </div>
 

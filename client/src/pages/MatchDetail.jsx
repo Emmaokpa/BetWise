@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { ChevronLeft, CheckCircle2, TrendingUp, Users, Shield, Zap, Activity } from "lucide-react";
+import { ChevronLeft, CheckCircle2, TrendingUp, Users, Shield, Activity } from "lucide-react";
+import TeamIcon from "../components/shared/TeamIcon";
 import { motion } from "framer-motion";
 import SEO from "../components/shared/SEO";
 
@@ -71,29 +72,25 @@ const MatchDetail = () => {
             
             <div className="p-8 md:p-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
               <div className="flex-1 flex flex-col items-center">
-                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-3xl glass-ultra mb-4 flex items-center justify-center p-4 lg:p-6 relative group-hover:border-brand-primary/20 transition-all bg-white/5">
-                    <img src={match.homeTeam.crest || '/placeholder.png'} alt="" className="w-full h-full object-contain filter drop-shadow-xl" />
-                 </div>
-                 <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{match.homeTeam.name}</h2>
+                 <TeamIcon src={match.homeTeam.crest} name={match.homeTeam.name} size="lg" />
+                 <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight mt-4">{match.homeTeam.name}</h2>
                  <p className="text-xs font-bold text-text-muted mt-1 uppercase tracking-widest">Home Advantage</p>
               </div>
 
               <div className="flex-1 flex flex-col items-center justify-center">
-                 <span className="text-4xl md:text-6xl font-black italic mb-2 text-white/10 group-hover:text-white/20 transition-colors">VS</span>
-                 <div className="bg-brand-primary/10 text-brand-primary text-xs font-black px-4 py-1.5 rounded-lg tracking-widest uppercase border border-brand-primary/20 mb-2">
+                 <span className="text-4xl md:text-6xl font-black italic mb-2 text-white/5 group-hover:text-white/10 transition-colors">VS</span>
+                 <div className="bg-brand-primary/10 text-brand-primary text-[10px] font-black px-4 py-1.5 rounded-lg tracking-widest uppercase border border-brand-primary/20 mb-2">
                    {match.competition.name}
                  </div>
                  <div className="flex items-center gap-2">
-                   <Zap size={14} className={`text-brand-primary fill-brand-primary ${isLive ? 'animate-pulse' : ''}`} />
+                   <Activity size={14} className={`text-brand-primary ${isLive ? 'animate-pulse' : ''}`} />
                    <span className="text-xs font-black text-white uppercase tracking-widest">{isLive ? 'LIVE' : 'PRE-MATCH'}</span>
                  </div>
               </div>
 
               <div className="flex-1 flex flex-col items-center">
-                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-3xl glass-ultra mb-4 flex items-center justify-center p-4 lg:p-6 relative group-hover:border-brand-accent/20 transition-all bg-white/5">
-                    <img src={match.awayTeam.crest || '/placeholder.png'} alt="" className="w-full h-full object-contain filter drop-shadow-xl" />
-                 </div>
-                 <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">{match.awayTeam.name}</h2>
+                 <TeamIcon src={match.awayTeam.crest} name={match.awayTeam.name} size="lg" />
+                 <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight mt-4">{match.awayTeam.name}</h2>
                  <p className="text-xs font-bold text-text-muted mt-1 uppercase tracking-widest">Visiting Threat</p>
               </div>
             </div>
@@ -115,15 +112,14 @@ const MatchDetail = () => {
                <div className="bg-white text-black font-black text-3xl px-4 py-2 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.2)] mb-3">
                  {prediction.odds || (1.5 + (prediction.matchApiId % 5) * 0.4).toFixed(2)}
                </div>
-               <button 
-                onClick={() => {
-                  const text = encodeURIComponent(`💡 FREE AI TIP: ${match.homeTeam.name} vs ${match.awayTeam.name}\n\nVerdict: ${prediction.outcome}\nConfidence: ${prediction.confidence || 75}%\n\nSee full analysis at BetWise: ${window.location.href}`);
-                  window.open(`https://wa.me/?text=${text}`, '_blank');
-                }}
-                className="w-full py-3 px-4 bg-green-500 text-black font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] transition-all"
-               >
-                 SHARE TIP
-               </button>
+                <a 
+                 href="https://www.bet9ja.com/?affid=YOUR_ID"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="w-full py-4 px-6 bg-brand-primary text-black font-black uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center gap-2 hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,156,0.3)] transition-all"
+                >
+                  STAKE ON BET9JA <TrendingUp size={18} />
+                </a>
              </div>
           </div>
 

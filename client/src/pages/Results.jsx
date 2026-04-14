@@ -77,58 +77,54 @@ const Results = () => {
       </div>
 
       {/* Results Matrix */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="flex flex-col gap-4">
         <AnimatePresence mode="popLayout">
           {isLoading ? (
             Array(6).fill(0).map((_, i) => (
-              <div key={i} className="glass-ultra rounded-[32px] p-8 h-48 border border-white/5 animate-pulse" />
+              <div key={i} className="glass-ultra rounded-3xl p-8 h-32 border border-white/5 animate-pulse" />
             ))
           ) : filteredPredictions.length > 0 ? (
             filteredPredictions.map((p, index) => (
               <motion.div 
                 key={p._id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="glass-ultra shimmer-effect group rounded-[32px] p-6 flex flex-col md:flex-row items-center justify-between gap-6 border-white/5 hover:border-white/10 card-hover-scale"
+                className="glass-ultra shimmer-effect group rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 border-white/5 hover:border-white/10 transition-all"
               >
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-2 px-2 py-1 rounded-md bg-white/5">
-                    {p.match.competition.name}
-                  </span>
-                  <div className="flex flex-col gap-0.5">
-                    <h3 className="text-base md:text-lg font-black text-white tracking-tight uppercase line-clamp-1">{p.match.homeTeam.shortName}</h3>
-                    <div className="flex items-center justify-center md:justify-start gap-2">
-                       <span className="text-[10px] font-black text-text-muted italic">VS</span>
-                       <h3 className="text-base md:text-lg font-black text-white tracking-tight uppercase line-clamp-1">{p.match.awayTeam.shortName}</h3>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center px-6 border-x border-white/5">
-                  <span className="text-4xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] leading-none italic">{p.actualResult}</span>
-                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Outcome</span>
-                </div>
-
-                <div className="flex flex-col items-center md:items-end gap-3 min-w-[140px]">
-                   <div className="text-center md:text-right">
-                      <span className="block text-[10px] font-black text-text-muted uppercase tracking-widest mb-0.5">Prediction</span>
-                      <span className="text-sm font-black text-white">{p.outcome} <span className="text-brand-secondary">@{p.odds || (1.5 + Math.random()).toFixed(2)}</span></span>
+                <div className="flex items-center gap-6 flex-1">
+                   {/* Result Indicator Badge */}
+                   <div className={`shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center border ${p.isCorrect ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-red-500/10 border-red-500/20 text-red-500'}`}>
+                      {p.isCorrect ? <CheckCircle2 size={24} /> : <XCircle size={24} />}
                    </div>
-                   
-                   {p.isCorrect ? (
-                     <div className="bg-[#00FF9C]/10 text-[#00FF9C] border border-[#00FF9C]/20 px-5 py-2 rounded-2xl flex items-center gap-2 shadow-[0_0_20px_rgba(0,255,156,0.1)]">
-                        <CheckCircle2 size={16} />
-                        <span className="text-[10px] font-black uppercase tracking-widest">Signal Verified</span>
-                     </div>
-                   ) : (
-                     <div className="bg-red-500/10 text-red-500 border border-red-500/20 px-5 py-2 rounded-2xl flex items-center gap-2 opacity-80">
-                        <XCircle size={16} />
-                        <span className="text-[10px] font-black uppercase tracking-widest">Missed Signal</span>
-                     </div>
-                   )}
+
+                   <div className="flex flex-col">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">{p.match.competition.name}</span>
+                        <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md ${p.isCorrect ? 'bg-brand-primary text-black' : 'bg-red-500 text-white'}`}>
+                          {p.isCorrect ? 'WIN' : 'MISS'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-base font-black text-white uppercase">{p.match.homeTeam.shortName}</h3>
+                        <span className="text-[10px] font-black text-text-muted italic">VS</span>
+                        <h3 className="text-base font-black text-white uppercase">{p.match.awayTeam.shortName}</h3>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="flex items-center gap-8 md:gap-12">
+                   <div className="text-center md:text-right">
+                      <span className="block text-[10px] font-black text-text-muted uppercase tracking-widest mb-1">Prediction</span>
+                      <span className="text-sm font-black text-white">{p.outcome} @{p.odds}</span>
+                   </div>
+
+                   <div className="text-center md:text-right">
+                      <span className="block text-[10px] font-black text-text-muted uppercase tracking-widest mb-1">Score</span>
+                      <span className="text-xl font-black text-white italic tracking-tighter">{p.actualResult}</span>
+                   </div>
                 </div>
               </motion.div>
             ))
@@ -136,13 +132,12 @@ const Results = () => {
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
-              className="lg:col-span-2 py-20 text-center glass-ultra rounded-[40px] border-dashed border-white/10 flex flex-col items-center"
+              className="py-20 text-center glass-ultra rounded-[40px] border-dashed border-white/10 flex flex-col items-center"
             >
               <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4">
                  <Filter size={24} className="text-text-muted" />
               </div>
               <p className="text-text-secondary font-black tracking-widest uppercase">No outcomes found in this segment</p>
-              <p className="text-xs text-text-muted mt-2 font-medium">Try clearing your filters or check back later.</p>
             </motion.div>
           )}
         </AnimatePresence>
